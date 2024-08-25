@@ -8,13 +8,13 @@ import Avatar from "react-avatar";
 
 const Navbar = () => {
   return (
-    <div className="h-16 w-full flex items-center pt-1 gap-10">
+    <div className="flex items-center pt-1 gap-10">
       <div className="flex items-center p-1 w-[238px]">
         <div className="flex justify-center items-center">
           <div className="h-[48px] w-[48px] flex justify-center items-center hover:bg-gray-200 hover:rounded-full p-1">
             <RxHamburgerMenu size={"24px"} className="pt-1" />
           </div>
-          <div className="h-[40px] w-[110px] flex justify-center items-center pt-1">
+          <div className=" w-[110px] flex justify-center items-center pt-1">
             <img
               src="src\assets\Gmail_Logo_32px.png"
               alt="gmail-logo"
@@ -24,7 +24,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="w-[760px] h-[48px] flex items-center bg-[#EAF1FB] rounded-full focus-within:bg-white focus-within:shadow-md focus-within:shadow-gray-400 transition-all duration-200 ease-in-out">
+      <div className="w-[760px] flex items-center bg-[#EAF1FB] rounded-full focus-within:bg-white focus-within:shadow-md focus-within:shadow-gray-400 transition-all duration-200 ease-in-out">
         <div className="flex h-[46px] w-[720px] items-center">
           <div className=" h-[46px] w-[46px] flex items-center justify-center hover:bg-gray-200 hover:rounded-full">
             <IoIosSearch size={"24px"} />
