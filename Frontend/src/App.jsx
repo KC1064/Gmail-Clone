@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Components/Navbar'
 const App = () => {
   return (
-    <div>
+    <div className='bg-[#F5F8FC]'>
       <Navbar />
     </div>
   )
