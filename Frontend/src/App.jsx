@@ -1,16 +1,32 @@
 import React from "react";
 import Navbar from "./Components/Navbar";
-import SideBar from "./Components/SideBar";
+import Body from "./Components/Body";
+import Mail from "./Components/Mail";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Inbox from "./Components/Inbox";
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Body />,
+    children: [
+      {
+        path: "/mail/:id",
+        element: <Mail />,
+      },
+      {
+        path: "/",
+        element: <Inbox />,
+      },
+    ],
+  },
+]);
 
 const App = () => {
   return (
     <div className="bg-[#f6f8fc] h-screen">
       <Navbar />
-      <div className="flex gap-3">
-        <SideBar />
-        <Inbox />
-      </div>
+      <RouterProvider router={appRouter} />
     </div>
   );
 };

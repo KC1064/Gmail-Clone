@@ -1,9 +1,16 @@
-import React from 'react'
-import Email from './Email'
+import React from "react";
+import Email from "./Email";
 const Emails_Page = () => {
   return (
-    <div><Email /></div>
-  )
-}
+    <div>
+      <Email />
+      <Email />
+      <Email />
+      <Email />
+      <Email />
+      <Email />
+    </div>
+  );
+};
 
-export default Emails_Page
+export default Emails_Page;

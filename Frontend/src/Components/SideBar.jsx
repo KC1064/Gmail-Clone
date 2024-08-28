@@ -37,7 +37,7 @@ const SideBar = () => {
 
   return (
     <div className="w-[18%] pt-3">
-      <div className="bg-[#C2E7FF] flex justify-center items-center rounded-2xl gap-2 ml-3 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out">
+      <div className="w-[160px] bg-[#C2E7FF] flex justify-center items-center rounded-2xl gap-2 ml-3 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out">
         <button className="text-lg font-roboto flex justify-center items-center gap-3 w-[140px] h-[55px]">
           <LuPencil size={"20px"} /> <span>Compose</span>
         </button>
