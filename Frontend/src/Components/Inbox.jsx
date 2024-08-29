@@ -31,7 +31,7 @@ const Inbox = () => {
   const [selected, isSelected] = useState(0);
 
   return (
-    <div className="bg-white flex-1 mr-4 mt-2 rounded-3xl h-[590px]">
+    <div className="bg-white flex-1 mr-4 mt-2 rounded-3xl h-[590px] overflow-y-auto">
       <div className="flex justify-between items-center border-b-2 border-gray-200">
         <div className="flex gap-4 mx-6 my-4 items-center">
           <div className="flex">

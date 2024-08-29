@@ -9,6 +9,12 @@ const Emails_Page = () => {
       <Email />
       <Email />
       <Email />
+      <Email />
+      <Email />
+      <Email />
+      <Email />
+      <Email />
+      <Email />
     </div>
   );
 };

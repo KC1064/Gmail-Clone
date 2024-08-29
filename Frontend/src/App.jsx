@@ -4,6 +4,7 @@ import Body from "./Components/Body";
 import Mail from "./Components/Mail";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Inbox from "./Components/Inbox";
+import SendMail from "./Components/SendMail";
 
 const appRouter = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ const App = () => {
     <div className="bg-[#f6f8fc] h-screen">
       <Navbar />
       <RouterProvider router={appRouter} />
+      <div className="absolute w-[30%] bottom-6 right-28 z-10">
+        <SendMail />
+      </div>
     </div>
   );
 };
