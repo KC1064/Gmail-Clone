@@ -5,6 +5,8 @@ import Mail from "./Components/Mail";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Inbox from "./Components/Inbox";
 import SendMail from "./Components/SendMail";
+import Login from "./Components/Login";
+import SignUp from "./Components/SignUp";
 
 const appRouter = createBrowserRouter([
   {
@@ -20,7 +22,13 @@ const appRouter = createBrowserRouter([
         element: <Inbox />,
       },
     ],
-  },
+  },{
+    path:"/login",
+    element:<Login />,
+  },{
+    path: "/signup",
+    element: <SignUp />
+  }
 ]);
 
 const App = () => {

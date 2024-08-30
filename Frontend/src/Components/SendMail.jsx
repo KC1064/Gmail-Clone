@@ -17,9 +17,9 @@ const SendMail = () => {
         open ? "block" : "hidden"
       } w-[450px] bg-white shadow-xl shadow-slate-300`}
     >
-      <div className="flex justify-between items-center rounded-t-xl bg-[#F2F6FB] py-1 px-2">
+      <div className="flex justify-between items-center rounded-t-xl bg-[#F2F6FB] py-1 px-3">
         <div className="py-1">New Message</div>
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <button
             onClick={(e) => {
               setClicked(!clicked);
@@ -32,10 +32,13 @@ const SendMail = () => {
               }`}
             ></div>
           </button>
+          <div className="w-3">
+
           <RxCross2
             className="cursor-pointer"
             onClick={() => dispatch(setOpen(false))}
           />
+          </div>
         </div>
       </div>
       <form action="" className={`${clicked ? "hidden":"flex flex-col"}`}>
