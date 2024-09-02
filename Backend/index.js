@@ -22,8 +22,12 @@ const corsOption = {
 app.use(cors(corsOption));
 
 //Routes
-app.use("api/v1/user",userRoute);
+app.use("/api/v1/user", userRoute);
 
 app.listen(3000,()=>{
     console.log("server is running on port 3000");
+})
+
+app.get('/test',(req,res)=>{
+    res.send("Hello World");
 })

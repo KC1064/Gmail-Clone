@@ -1,4 +1,4 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -11,17 +11,27 @@ export const register = async (req, res) => {
         .json({ message: "All fields are required", success: false });
 
     const user = await User.findOne({ email });
+
     if (user)
       return res
         .status(400)
-        .json({ message: "Email already exists", success: false });
+        .json({
+          message: "User already exist with this email",
+          success: false,
+        });
 
-    const Photo = `https://avatar.iran.liara.run/public`;
-    const hashedPass = await bcrypt.hash(password, 10);
-    await User.create({ fullname, email, password: hashedPass,profilePhoto:Photo});
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const profilePhoto = `https://avatar.iran.liara.run/public/boy`;
+    await User.create({
+      fullname,
+      email,
+      password: hashedPassword,
+      profilePhoto,
+    });
 
     return res.status(201).json({
-      message: "User created successfully",
+      message: "Account created successfully.",
       success: true,
     });
   } catch (error) {
@@ -64,7 +74,7 @@ export const login = async (req, res) => {
         samesite: "strict",
       })
       .json({
-        message: `${User.fullname} logged in Succesfully`,
+        message: `${user.fullname} logged in successfully`, // Corrected this line
         user,
       });
   } catch (error) {}
