@@ -23,10 +23,10 @@ const corsOption = {
 app.use(cors(corsOption));
 
 //Routes
-app.use("/api/v1/user", userRoute);
+app.use("/api/v1/user", userRoute); 
 app.use("/api/v1/email", emailRoute);
 
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log("server is running on port 3000");
 })
 
