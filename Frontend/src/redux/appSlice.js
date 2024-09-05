@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
     name: "app",
     initialState: {
-        open: false, // Ensure this is initialized correctly
+        open: false, 
+        user: null,
     },
     reducers: {
         setOpen: (state, action) => {

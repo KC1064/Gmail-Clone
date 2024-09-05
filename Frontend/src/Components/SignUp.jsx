@@ -1,41 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios'
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
   const [input, setInput] = useState({
-    username: "",
+    fullname: "",
     email: "",
     password: "",
   });
 
-  const changeHandler = (e)=>{
-    setInput({...input,[e.target.name]:e.target.value});
-  }
+  const navigate = useNavigate();
+  const changeHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("Sending data:", input);
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/user/register", input, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        "http://localhost:3000/api/v1/user/register",
+        input,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if(res.data.success){
+        navigate("/login");
+        toast.success(res.data.message);
+    }
       console.log(res.data);
     } catch (error) {
-      if (error.response) {
-        console.log("Error Response:", error.response.data);
-        console.log("Error Status:", error.response.status);
-        console.log("Error Headers:", error.response.headers);
-      } else if (error.request) {
-        console.log("Error Request:", error.request);
-      } else {
-        console.log("Error Message:", error.message);
-      }
+      console.error(error.response.data); 
     }
   };
-  
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-[#1E1F20] ">
@@ -54,10 +56,10 @@ const SignUp = () => {
         <form onSubmit={submitHandler} className="flex flex-col gap-4 w-[48%]">
           <input
             onChange={changeHandler}
-            value={input.username}
-            name="username"
+            value={input.fullname}  
+            name="fullname"  
             type="text"
-            placeholder="Username"
+            placeholder="Full Name"
             className="h-10 bg-transparent text-white border-2 pl-2 rounded-lg"
           />
           <input
@@ -83,7 +85,10 @@ const SignUp = () => {
                 <Link to={"/login"}>Click Here</Link>
               </span>
             </p>
-            <button className="bg-[#B7D0FB] h-[30px] w-[80px] rounded-2xl">
+            <button
+              type="submit"
+              className="bg-[#B7D0FB] h-[30px] w-[80px] rounded-2xl"
+            >
               Submit
             </button>
           </div>
