@@ -42,3 +42,17 @@ export const deleteEmail = async(req,res)=>{
         
     }
 }
+
+export const getAllEmailById = async (req,res) => {
+  try {
+    const userId = req.id;
+    const emails = await Email.find({userId});
+
+    return res.status(200).json(emails);
+    
+  } catch (error) {
+    console.log(error);
+    
+    
+  }
+}
