@@ -1,15 +1,51 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../redux/appSlice";
+import { setOpen, setEmails } from "../redux/appSlice";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const SendMail = () => {
-  // Corrected the useSelector to properly access the open state
-  const open = useSelector((store) => store.app.open);
+  const [formData, setFormData] = useState({
+    to: "",
+    subject: "",
+    message: "",
+  });
 
+  const { open, emails } = useSelector((store) => store.app);
   const dispatch = useDispatch();
 
+  const changeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const [clicked, setClicked] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setClicked(true);
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/v1/email/create",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      dispatch(setEmails([...emails, res.data.email]));
+      toast.success("Email sent successfully!");
+      console.log(formData);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong!");
+    } finally {
+      setClicked(false);
+      dispatch(setOpen(false));
+    }
+  };
 
   return (
     <div
@@ -24,7 +60,7 @@ const SendMail = () => {
             onClick={(e) => {
               setClicked(!clicked);
             }}
-            className="flex items-center w-full" 
+            className="flex items-center w-full"
           >
             <div
               className={`w-3 h-[2px] cursor-pointer bg-black flex flex-col ${
@@ -33,44 +69,51 @@ const SendMail = () => {
             ></div>
           </button>
           <div className="w-3">
-
-          <RxCross2
-            className="cursor-pointer"
-            onClick={() => dispatch(setOpen(false))}
-          />
+            <RxCross2
+              className="cursor-pointer"
+              onClick={() => dispatch(setOpen(false))}
+            />
           </div>
         </div>
       </div>
-      <form action="" className={`${clicked ? "hidden":"flex flex-col"}`}>
+      <form
+        onSubmit={submitHandler}
+        className={`${clicked ? "hidden" : "flex flex-col"}`}
+      >
         <input
           type="text"
+          name="to"
+          value={formData.to}
+          onChange={changeHandler}
           placeholder="Recipients"
           className="py-1 px-2 outline-none border-b-2 border-gray-300"
         />
         <input
           type="text"
+          name="subject"
+          value={formData.subject}
+          onChange={changeHandler}
           placeholder="Subject"
           className="py-1 px-2 outline-none border-b-2 border-gray-300"
         />
         <textarea
+          name="message"
           cols={50}
           rows={13}
+          value={formData.message}
+          onChange={changeHandler}
           placeholder="Enter the Message"
           className="outline-none pt-2 pl-2"
         ></textarea>
+        <button
+          type="submit"
+          className="h-auto w-[80px] mb-2 ml-2 bg-blue-500 text-white px-4 py-1 rounded-2xl"
+        >
+          Send
+        </button>
       </form>
     </div>
   );
 };
 
 export default SendMail;
-
-{
-  /* <div ">
-        <
-        <RxCross2 />
-      </div> */
-}
-<div className="cursor-pointer" onClick={() => dispatch(setOpen(false))}>
-  <RxCross2 />
-</div>;
